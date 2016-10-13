@@ -24,7 +24,8 @@
         <activity
             android:name=".AddPlayerActivity"
             android:label="@string/title_activity_add_player" />
-        <activity android:name=".AddPlayerActivity2"></activity>
+        <activity android:name=".AddPlayerActivity2" />
+        <activity android:name=".ShowPlayerActivity"></activity>
     </application>
 
 </manifest>
