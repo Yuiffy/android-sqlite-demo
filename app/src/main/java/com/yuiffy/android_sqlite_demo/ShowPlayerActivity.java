@@ -1,11 +1,17 @@
 package com.yuiffy.android_sqlite_demo;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +41,14 @@ public class ShowPlayerActivity extends AppCompatActivity {
 
         mDbHelper = new PlayerDbHelper(this);
         db = mDbHelper.getReadableDatabase();
-
-        List<String> players = new ArrayList<String>();
-        players = mDbHelper.getAllPlayerName(db);
-        ArrayAdapter<String> theAdapter = new ArrayAdapter<String>(ShowPlayerActivity.this, android.R.layout.simple_expandable_list_item_1, players);
         ListView lv = (ListView) findViewById(R.id.lv_show_players);
-        lv.setAdapter(theAdapter);
+
+        Cursor c = mDbHelper.getAllPlayerCursor(db);
+
+        CursorAdapter ca = new SimpleCursorAdapter(ShowPlayerActivity.this,
+                android.R.layout.simple_expandable_list_item_1,
+                c, new String[]{MyContract.PlayerEntry.COLUMN_NAME_PLAYER_NAME},
+                new int[]{android.R.id.text1});
+        lv.setAdapter(ca);
     }
 }

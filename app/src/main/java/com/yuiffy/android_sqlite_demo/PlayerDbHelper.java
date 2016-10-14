@@ -43,7 +43,7 @@ public class PlayerDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public List<String> getAllPlayerName(SQLiteDatabase db) {
+    public Cursor getAllPlayerCursor(SQLiteDatabase db) {
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
@@ -66,6 +66,11 @@ public class PlayerDbHelper extends SQLiteOpenHelper {
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
+        return c;
+    }
+
+    public List<String> getAllPlayerName(SQLiteDatabase db) {
+        Cursor c = getAllPlayerCursor(db);
         c.moveToFirst();
         List<String> list = new ArrayList<String>();
         while (c.isAfterLast() == false) {
