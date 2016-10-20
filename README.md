@@ -14,3 +14,4 @@ is so simple, good to know it!
 
 use sqlite, simplely, no multi-thread, though the android docs said "Note: Because they can be long-running, be sure that you call getWritableDatabase() or getReadableDatabase() in a background thread, such as with AsyncTask or IntentService."
 
+to see async, see https://github.com/Yuiffy/android-CursorLoader-demo , it use ContentProvider/ CursorLoader.
